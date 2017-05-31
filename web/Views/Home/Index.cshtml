@@ -1,1 +1,18 @@
 ﻿<h2>Welcome to ASP.NET MVC @ViewData["Version"] on @ViewData["Runtime"]!</h2>
+
+    <div>
+        <!-- ボタンを押すとAPIを呼ぶ -->
+        <button onclick="callValueName()">GET /api/Values/?name='abc'</button>
+        <br/>
+        <span id="helloWorldResultPlaceHolder">ここにHelloWorldAPIの結果が入ります</span>
+    </div>
+
+    <script type="text/javascript">
+        function callValueName() {
+	        alert('called');
+            // jQueryを使って呼ぶだけ
+            $.ajax("localhost:8080/api/Values/?name='abc'").then(function (r) {
+                $("#helloWorldResultPlaceHolder").text(r);
+            });
+        }
+    </script>
