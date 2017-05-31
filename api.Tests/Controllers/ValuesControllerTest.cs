@@ -3,6 +3,7 @@ using System;
 using System.Web.Http;
 using api;
 using api.Controllers;
+using System.Collections.Generic;
 
 namespace api.Tests.Controllers
 {
@@ -10,13 +11,37 @@ namespace api.Tests.Controllers
     public class ValuesControllerTest
     {
 		[Test]
-		public void GetValue()
+		public void Get()
         {
             var controller = new ValuesController();
 
-            var result = controller.GetValue();
+            var result = (IEnumerable<string>)controller.Get();
 
-            Assert.AreEqual("value", result);
+            var forecast = new string[] { "value", "value2" };
+
+            Assert.AreEqual(forecast, result);
+        }
+
+        [Test]
+        public void GetByName()
+        {
+            var controller = new ValuesController();
+
+            var result = (string)controller.GetByName("Porter");
+            var forecast = (string)"my name is Porter";
+
+            Assert.AreEqual(forecast,result);
+        }
+
+        [Test]
+        public void Post()
+        {
+            var controller = new ValuesController();
+
+            var result = (string)controller.Post("1", "");
+            var forecast = "success";
+
+            Assert.AreEqual(forecast, result);
         }
     }
 }
